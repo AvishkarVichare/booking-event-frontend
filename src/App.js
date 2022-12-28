@@ -14,6 +14,7 @@ import AdminEventInfo from "./components/AdminEventInfo";
 import Search from "./components/search";
 import UserState from "./context/user/UserState";
 import EventState from "./context/event/EventState";
+import AddEvent from "./components/AddEvent";
 
 function ColorSchemesExample() {
   return (
@@ -46,6 +47,9 @@ function ColorSchemesExample() {
         <Route path="/profile" element={<StudProfile />} />
 
         <Route path="/search" element={<Search />} />
+
+        <Route path="/addevent" element={<AddEvent />}></Route>
+
       </Routes>
 
       <Footer />
