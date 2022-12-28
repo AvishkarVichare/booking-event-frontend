@@ -17,6 +17,10 @@ function AdminHome() {
   const {getEvents, events} = eventContext;
   
   useEffect(()=>{
+
+    if(!localStorage.getItem('token'))
+       navigate('/')
+
     getEvents();
   },[])
 
@@ -93,7 +97,7 @@ function AdminHome() {
           <button onClick={()=>{
             navigate(`/adminevent/${value}`)
           }}>
-            Edit
+            Details
           </button>
           </>
         );
@@ -123,13 +127,13 @@ function AdminHome() {
               <h1>Event List</h1>
             </center>
             <DataGrid
-              rows={events}
-              columns={columns}
+              rows={events?events:[{_id:-2}]}
+              columns={events && columns}
               pageSize={10}
               rowsPerPageOptions={[10]}
               disableSelectionOnClick
               experimentalFeatures={{ newEditingApi: true }}
-              getRowId={(events) =>  events._id+ uuidv4()}
+              getRowId={(events) =>  events?._id+ uuidv4()}
 
             />
           </Box>
@@ -140,10 +144,8 @@ function AdminHome() {
       <br />
       <br />
       <center>
-        <Button variant="contained" color="success">
-          <NavLink color="#ffffff">
+        <Button  onClick={()=>navigate('/addEvent')} variant="contained" color="success">
             Add Event
-          </NavLink>
         </Button>
       </center>
     </>
