@@ -7,6 +7,19 @@ const EventState = (props)=>{
     const [events, setEvents] = useState([]);
     const [event, setEvent] = useState({});
 
+
+    const createEvent = async(event)=>{
+        console.log("oure",event)
+        const res = await axios.post('/event/create', event, {
+            headers:{
+                'token':localStorage.getItem('token'),
+                'content-type': 'multipart/form-data',
+
+            }
+        })
+        console.log(res.data)
+    }
+
     const getEvents = async()=>{
         const res = await axios.get('/event/getEvents', {
             headers:{
@@ -22,12 +35,12 @@ const EventState = (props)=>{
                 'token':localStorage.getItem('token')
             }
         });
-        // console.log(res.data)
+        console.log(res.data)
         setEvent(res.data.event)
     }
 
     return(
-        <EventContext.Provider value={{getEvents, events, setEvents, getEvent, event, setEvent}}>
+        <EventContext.Provider value={{getEvents, events, setEvents, getEvent, event, setEvent, createEvent}}>
             {
                 props.children
             }

@@ -45,7 +45,7 @@ function AdminEventInfo() {
             <center>
               <Box sx={{ width: "100vh", height: "60vh" }}>
                 <img
-                  src={`http://localhost:4000/images/${event.image.filename}`}
+                  src={`http://localhost:4000/images/${event?.image?.filename}`}
                   alt="banner1"
                   style={{ height: "60vh", width: "100vh" }}
                 ></img>
@@ -180,7 +180,11 @@ function AdminEventInfo() {
         <Modal.Header closeButton>
           <Modal.Title>Modal heading</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+        <Modal.Body>
+
+              
+
+        </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
