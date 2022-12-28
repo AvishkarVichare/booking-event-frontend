@@ -27,7 +27,7 @@ function LoginPage() {
             Login
           </h2>
           <div className="flex flex-col text-gray-400 py-2">
-            <label>Username</label>
+            <label>Email</label>
             <input onChange={handleOnChange}
             name="email"
               type="text"

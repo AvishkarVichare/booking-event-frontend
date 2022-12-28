@@ -1,16 +1,33 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import banner1 from "../images/banner1.jpg";
 import Button from "@mui/material/Button";
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Grid from "@mui/material/Grid";
-import { ListItemText } from "@mui/material";
+import EventContext from "../context/event/EventContext";
+import Modal from 'react-bootstrap/Modal';
 
 function AdminEventInfo() {
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const eventContext = useContext(EventContext)
+  const { getEvent, event, setEvent } = eventContext;
+  const params = useParams()
+
+  useEffect(() => {
+    getEvent(params.eid)
+  }, [])
+
+
+
+
   const EventInfo = {
     Event_ID: "1234",
     Event_Name: "Techgyanathon",
@@ -47,23 +64,96 @@ function AdminEventInfo() {
                   <h1>Event Information</h1>
                 </center>
                 <center>
+
+
                   <Grid container spacing={2}>
                     <Grid item xs={12} md={6}>
                       <List>
                         <ListItem>
-                          <ListItemText>Event Name:</ListItemText>
+                          <div className="flex gap-3">
+                            <span>
+                              Event Name:
+                            </span>
+                            <span >
+                              {
+                                event?.eventName
+                              }
+                            </span>
+                          </div>
                         </ListItem>
                         <ListItem>
-                          <ListItemText>Event Description:</ListItemText>
+                          <div className="flex gap-3">
+                            <span>
+                              Event Description:
+                            </span>
+                            <span >
+                              {
+                                event?.description
+                              }
+                            </span>
+                          </div>
                         </ListItem>
                         <ListItem>
-                          <ListItemText>Event Venue:</ListItemText>
+                          <div></div>
+                          <div className="flex gap-3">
+                            <span>
+                              Event Venue:
+                            </span>
+                            <span >
+                              {
+                                event?.eventVenue
+
+                              }
+                            </span>
+                          </div>
                         </ListItem>
                         <ListItem>
-                          <ListItemText>Event Date:</ListItemText>
+                          <div className="flex gap-3">
+                            <span>
+                              Event Date:
+                            </span>
+                            <span >
+                              {
+                                new Date(event.eventDate).toDateString()
+                              }
+                            </span>
+                          </div>
                         </ListItem>
                         <ListItem>
-                          <ListItemText>Event Time:</ListItemText>
+                          <div className="flex gap-3">
+                            <span>
+                              Event Time:
+                            </span>
+                            <span >
+                              {
+                                event.eventTime
+                              }
+                            </span>
+                          </div>
+                        </ListItem>
+                        <ListItem>
+                          <div className="flex gap-3">
+                            <span>
+                              Event Type:
+                            </span>
+                            <span >
+                              {
+                                event.eventType
+                              }
+                            </span>
+                          </div>
+                        </ListItem>
+                        <ListItem>
+                          <div className="flex gap-3">
+                            <span>
+                              Branch:
+                            </span>
+                            <span >
+                              {
+                                event.eventBranch
+                              }
+                            </span>
+                          </div>
                         </ListItem>
                       </List>
                     </Grid>
@@ -77,13 +167,33 @@ function AdminEventInfo() {
               <Button variant="contained" color="success">
                 <NavLink to="/admin">Back</NavLink>
               </Button>
-              <Button variant="contained" color="success">
-                Edit
-              </Button>
+              {/* <Button variant="contained" color="success">
+              </Button> */}
+              <Button variant="primary" onClick={handleShow}>
+              edit
+
+      </Button>
+            
             </center>
           </Box>
         </Container>
       </React.Fragment>
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal heading</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+  
     </>
   );
 }

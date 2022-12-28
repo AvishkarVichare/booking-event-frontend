@@ -41,7 +41,7 @@ function ColorSchemesExample() {
 
         <Route path="/admin" element={<AdminHome />}></Route>
 
-        <Route path="/adminevent" element={<AdminEventInfo />}></Route>
+        <Route path="/adminevent/:eid" element={<AdminEventInfo />}></Route>
 
         <Route path="/profile" element={<StudProfile />} />
 

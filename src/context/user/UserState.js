@@ -22,9 +22,11 @@ const UserState = (props)=>{
        try{
         const res = await axios.post('/u/loginUser',user);
         console.log(res);
-        if(res.data.success)
+        if(res.data.success){
+
             localStorage.setItem('token', res.data.token);
             naviage('/home')
+        }
        }catch(err){
         console.log(err)
        }
