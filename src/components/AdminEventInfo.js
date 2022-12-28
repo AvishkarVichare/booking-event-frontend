@@ -45,17 +45,14 @@ function AdminEventInfo() {
             <center>
               <Box sx={{ width: "100vh", height: "60vh" }}>
                 <img
-                  src={banner1}
+                  src={`http://localhost:4000/images/${event.image.filename}`}
                   alt="banner1"
                   style={{ height: "60vh", width: "100vh" }}
                 ></img>
               </Box>
             </center>
             <center>
-              <Button variant="contained" component="label">
-                Edit Image
-                <input hidden accept="image/*" multiple type="file" />
-              </Button>
+              
             </center>
             <br />
             <center>

@@ -11,7 +11,8 @@ function IndivisualCard ({event}){
     return (
       <Card style={{ width: "18rem" }} className="box">
         {/* <Card.Img variant="top" src={event?.image} /> */}
-        <img className="h-[300px] w-[300px]" src={`http://localhost:4000/public/images/avtar.png`} alt="" />
+        <img src={`http://localhost:4000/images/${event.image.filename}`} alt="My Image" />
+        {/* <img className="h-[300px] w-[300px]" src={`http://localhost:4000/public/images/avtar.png`} alt="" /> */}
         <Card.Body>
           <Card.Title>{event.eventname}</Card.Title>
           <button onClick={()=>{navigate(`/event/${event._id}`)}} className="bg-purple-700 text-white px-3 py-2 rounded-xl">
