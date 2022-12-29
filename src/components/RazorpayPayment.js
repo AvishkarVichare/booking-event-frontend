@@ -26,7 +26,7 @@ function RazorpayPayment() {
             return;
         }
 
-        const result = await axios.post("http://localhost:3000/orders");
+        const result = await axios.post("http://localhost:5000/orders");
 
         if (!result) {
             alert("Server error. Are you online?");
@@ -53,7 +53,7 @@ function RazorpayPayment() {
                 };
                 console.log(data)
 
-                const result = await axios.post("http://localhost:3000/success", data);
+                const result = await axios.post("http://localhost:5000/success", data);
 
                 alert("Payment Successful\n" + result.data.razorpayPaymentId);
             },

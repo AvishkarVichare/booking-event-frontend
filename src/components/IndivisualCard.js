@@ -10,7 +10,7 @@ function IndivisualCard ({event}){
 
     return (
       <Card style={{ width: "18rem" }} className="box">
-        <img src={`http://localhost:4000/images/${event.image.filename}`} alt="My Image" />
+        <img src={`http://localhost:5000/images/${event.image.filename}`} alt="My Image" />
         <h4>
           {
             event.eventName
