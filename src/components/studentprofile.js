@@ -9,6 +9,7 @@ import { ListItemText } from "@mui/material";
 import Button from "@mui/material/Button";
 import { DataGrid } from "@mui/x-data-grid";
 import { NavLink } from "react-router-dom";
+import axios from "axios"
 
 const columns = [
   {
@@ -40,6 +41,17 @@ const columns = [
 const rows = [];
 
 export const StudProfile = () => {
+
+  const [user, setUser] = React.useState(null);
+
+  React.useEffect(() => {
+    axios.get("/u/getUser", { headers: { "token": localStorage.getItem("token") } }).then((res) => {
+      setUser(res.data.user);
+      console.log(res.data.user)
+    });
+  }, []);
+
+
   return (
     <center>
       <React.Fragment>
@@ -73,22 +85,22 @@ export const StudProfile = () => {
                         <center>
                           <List>
                             <ListItem>
-                              <ListItemText>Student Name:</ListItemText>
+                              <ListItemText>Student Name: {user?.name}</ListItemText>
                             </ListItem>
                             <ListItem>
-                              <ListItemText>Student ID:</ListItemText>
+                              <ListItemText>Student ID: {user?._id}</ListItemText>
                             </ListItem>
                             <ListItem>
-                              <ListItemText>Student Email:</ListItemText>
+                              <ListItemText>Student Email: {user?.email}</ListItemText>
                             </ListItem>
                             <ListItem>
-                              <ListItemText>Phone Number:</ListItemText>
+                              <ListItemText>Phone Number: {user?.phone}</ListItemText>
                             </ListItem>
                             <ListItem>
-                              <ListItemText>Branch:</ListItemText>
+                              <ListItemText>Branch: {user?.branch}</ListItemText>
                             </ListItem>
                             <ListItem>
-                              <ListItemText>Division:</ListItemText>
+                              <ListItemText>Division: {user?.div}</ListItemText>
                             </ListItem>
                           </List>
                         </center>

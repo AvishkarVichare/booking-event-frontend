@@ -15,6 +15,7 @@ import Search from "./components/search";
 import UserState from "./context/user/UserState";
 import EventState from "./context/event/EventState";
 import AddEvent from "./components/AddEvent";
+import RazorpayPayment from "./components/RazorpayPayment";
 
 function ColorSchemesExample() {
   return (
@@ -49,6 +50,9 @@ function ColorSchemesExample() {
         <Route path="/search" element={<Search />} />
 
         <Route path="/addevent" element={<AddEvent />}></Route>
+
+        <Route path="/payment" element={<RazorpayPayment />}></Route>
+
 
       </Routes>
 

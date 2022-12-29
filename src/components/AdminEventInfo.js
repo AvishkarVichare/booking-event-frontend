@@ -45,7 +45,7 @@ function AdminEventInfo() {
             <center>
               <Box sx={{ width: "100vh", height: "60vh" }}>
                 <img
-                  src={`http://localhost:4000/images/${event?.image?.filename}`}
+                  src={`http://localhost:5000/images/${event?.image?.filename}`}
                   alt="banner1"
                   style={{ height: "60vh", width: "100vh" }}
                 ></img>
