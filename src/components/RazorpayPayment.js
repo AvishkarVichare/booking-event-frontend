@@ -51,7 +51,7 @@ function RazorpayPayment() {
                     // razorpayOrderId: response.razorpay_order_id,
                     // razorpaySignature: response.razorpay_signature,
                 };
-                console.log(data)
+                console.log(data) 
 
                 const result = await axios.post("http://localhost:5000/success", data);
 
