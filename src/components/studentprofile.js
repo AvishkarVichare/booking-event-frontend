@@ -9,6 +9,8 @@ import { ListItemText } from "@mui/material";
 import Button from "@mui/material/Button";
 import { DataGrid } from "@mui/x-data-grid";
 import { NavLink } from "react-router-dom";
+import Table from 'react-bootstrap/Table';
+import Modal from 'react-bootstrap/Modal';
 import axios from "axios"
 
 const columns = [
@@ -38,10 +40,8 @@ const columns = [
   },
 ];
 
-const rows = [];
 
 export const StudProfile = () => {
-
   const [user, setUser] = React.useState(null);
   const [bookedEvents, setBookedEvents] = React.useState(null);
 
@@ -64,79 +64,96 @@ export const StudProfile = () => {
     <center>
       <React.Fragment>
         <CssBaseline>
-          <Container maxWidth="s">
-            <Box sx={{ bgcolor: "#fffff0", height: "160vh", width: "100vh" }}>
-              <br />
-              <Container maxWidth="s">
-                <Box sx={{ bgcolor: "#ffffff", height: "30vh", width: "30vh" }}>
-                  <img
-                    src={profile}
-                    alt="profile"
-                    sx={{ height: "30vh", width: "30vh" }}
-                  />
-                  <br />
-                  <Button variant="contained" component="label">
-                    Upload
-                    <input hidden accept="image/*" multiple type="file" />
-                  </Button>
-                </Box>
-              </Container>
-              <br />
-              <Container maxWidth="s">
-                <Box sx={{ bgcolor: "#ffffff", height: "55vh" }}>
-                  <h1>
-                    <center>Student Info</center>
-                  </h1>
-                  <p>
-                    <Grid container spacing={2}>
-                      <Grid item xs={12} md={6}>
-                        <center>
-                          <List>
-                            <ListItem>
-                              <ListItemText>Student Name: {user?.name}</ListItemText>
-                            </ListItem>
-                            <ListItem>
-                              <ListItemText>Student ID: {user?.studenid}</ListItemText>
-                            </ListItem>
-                            <ListItem>
-                              <ListItemText>Student Email: {user?.email}</ListItemText>
-                            </ListItem>
-                            <ListItem>
-                              <ListItemText>Phone Number: {user?.phone}</ListItemText>
-                            </ListItem>
-                            <ListItem>
-                              <ListItemText>Branch: {user?.branch}</ListItemText>
-                            </ListItem>
-                            <ListItem>
-                              <ListItemText>Division: {user?.div}</ListItemText>
-                            </ListItem>
-                          </List>
-                        </center>
-                      </Grid>
+          <Box sx={{ bgcolor: "#fffff0", width: "100vh" }}>
+            <br />
+            <Container maxWidth="s">
+              <Box sx={{ bgcolor: "#ffffff", height: "30vh", width: "30vh" }}>
+                <img
+                  src={profile}
+                  alt="profile"
+                  sx={{ height: "30vh", width: "30vh" }}
+                />
+                <br />
+                <Button variant="contained" component="label">
+                  Upload
+                  <input hidden accept="image/*" multiple type="file" />
+                </Button>
+              </Box>
+            </Container>
+            <br />
+            <Container maxWidth="s">
+              <Box sx={{ bgcolor: "#ffffff", height: "55vh" }}>
+                <h1>
+                  <center>Student Info</center>
+                </h1>
+                <p>
+                  <Grid container spacing={2}>
+                    <Grid item xs={12} md={6}>
+                      <center>
+                        <List>
+                          <ListItem>
+                            <ListItemText>Student Name: {user?.name}</ListItemText>
+                          </ListItem>
+                          <ListItem>
+                            <ListItemText>Student ID: {user?._id}</ListItemText>
+                          </ListItem>
+                          <ListItem>
+                            <ListItemText>Student Email: {user?.email}</ListItemText>
+                          </ListItem>
+                          <ListItem>
+                            <ListItemText>Phone Number: {user?.phone}</ListItemText>
+                          </ListItem>
+                          <ListItem>
+                            <ListItemText>Branch: {user?.branch}</ListItemText>
+                          </ListItem>
+                          <ListItem>
+                            <ListItemText>Division: {user?.div}</ListItemText>
+                          </ListItem>
+                        </List>
+                      </center>
                     </Grid>
-                  </p>
-                  <center>
-                    <Button variant="contained" color="success">
-                      Edit Info
-                    </Button>
-                  </center>
-                </Box>
-              </Container>
-              <br />
-              <Container maxWidth="s">
-                <Box sx={{ bgcolor: "#ffffff", height: "60vh" }}>
-                  <h1>Event Registered</h1>
-                  <Box sx={{ height: 400, width: "100%" }}>
-                    <DataGrid
-                      rows={rows}
-                      columns={columns}
-                      pageSize={5}
-                      rowsPerPageOptions={[10]}
-                    />
-                  </Box>
-                </Box>
-              </Container>
-            </Box>
+                  </Grid>
+                </p>
+                <center>
+                  <Button variant="contained" color="success">
+                    Edit Info
+                  </Button>
+                </center>
+              </Box>
+            </Container>
+          </Box>
+          <br />
+          <Container>
+            <Table striped bordered hover>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Event Name</th>
+                  <th>Event Host</th>
+                  <th>Type</th>
+                  <th>Venue</th>
+                  <th>Price</th>
+                  <th>Date</th>
+                  <th>Branch</th>
+                  <th>Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                {bookedEvents?.map((value, index) => {
+                  return <tr>
+                    <td>{index + 1}</td>
+                    <td>{value.eventName}</td>
+                    <td>{value.eventHost}</td>
+                    <td>{value.eventType}</td>
+                    <td>{value.eventVenue}</td>
+                    <td>{value.eventPrice} .Rs</td>
+                    <td>{value.eventDate}</td>
+                    <td>{value.eventBranch}</td>
+                    <td>{value.eventTime}</td>
+                  </tr>
+                })}
+              </tbody>
+            </Table>
           </Container>
         </CssBaseline>
       </React.Fragment>
