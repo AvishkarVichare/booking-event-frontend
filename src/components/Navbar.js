@@ -27,12 +27,27 @@ function NavScrollExample() {
             <Nav.Link href="#action2">Link</Nav.Link>
             <Dropdown>
               <Dropdown.Toggle variant="success" id="dropdown-basic">
-                Filters
+                Department
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
-                <Dropdown.Item href="/search">Department</Dropdown.Item>
-                <Dropdown.Item href="/search">Events</Dropdown.Item>
+                <Dropdown.Item>Information Technology</Dropdown.Item>
+                <Dropdown.Item>Computer Science</Dropdown.Item>
+                <Dropdown.Item>Electronics & Telecommunication</Dropdown.Item>
+                <Dropdown.Item>Automobile</Dropdown.Item>
+                <Dropdown.Item>Civil</Dropdown.Item>
+
+              </Dropdown.Menu>
+            </Dropdown>
+            &nbsp;&nbsp;
+            <Dropdown>
+              <Dropdown.Toggle variant="success" id="dropdown-basic">
+                Types
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                <Dropdown.Item>Technical</Dropdown.Item>
+                <Dropdown.Item>Non Technical</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           </Nav>
