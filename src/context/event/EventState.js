@@ -17,7 +17,7 @@ const EventState = (props)=>{
 
             }
         })
-        console.log(res.data)
+        // console.log(res.data)
     }
 
     const getEvents = async()=>{
@@ -35,9 +35,12 @@ const EventState = (props)=>{
                 'token':localStorage.getItem('token')
             }
         });
-        console.log(res.data)
+        // console.log(res.data)
         setEvent(res.data.event)
     }
+
+
+   
 
     return(
         <EventContext.Provider value={{getEvents, events, setEvents, getEvent, event, setEvent, createEvent}}>

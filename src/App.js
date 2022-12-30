@@ -51,7 +51,7 @@ function ColorSchemesExample() {
 
         <Route path="/addevent" element={<AddEvent />}></Route>
 
-        <Route path="/payment" element={<RazorpayPayment />}></Route>
+        {/* <Route path="/payment/:eid" element={<RazorpayPayment />}></Route> */}
 
 
       </Routes>

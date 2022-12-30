@@ -5,9 +5,64 @@ import Container from "@mui/material/Container";
 import banner1 from "../images/banner1.jpg";
 import { Table } from "@mui/material";
 import InteractiveList from "./list";
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
+import EventContext from "../context/event/EventContext";
+import axios from "axios";
+import Razorpay from 'react-razorpay'
+import { data } from "autoprefixer";
 
 export default function EventInfo() {
+
+  const eventContext = React.useContext(EventContext)
+  const { getEvent, event, setEvent } = eventContext;
+  const params = useParams()
+
+
+ 
+  const handleRegister = async()=>{
+    const res = await axios.post('/orders',{
+      amount: event.eventPrice
+    })
+
+    var options = {
+      key: "rzp_test_TRI6oMbV9P1Wvj", // Enter the Key ID generated from the Dashboard
+      amount: res.data.order.amount,
+      currency: "INR",
+      name: "Acme Corp",
+      "description": "Test Transaction",
+      // image: "https://example.com/your_logo",  
+      order_id: res.data.order.id, 
+      handler : async function(response){
+        const res = await axios.post(`/event/bookEvent/${event._id}`,response,{
+          headers:{
+            'token': localStorage.getItem('token')
+          }
+        })
+        // console.log("our res",res)
+      },
+      prefill: {
+          name: "Gaurav Kumar",
+          email: "gaurav.kumar@example.com",
+          contact: "9999999999"
+      },
+      notes: {
+          address: "Razorpay Corporate Office"
+      },
+      "theme": {
+          color: "#3399cc"
+      }
+  };
+  const razor = new window.Razorpay(options);
+  razor.open();
+  
+
+    // console.log(res.data)
+  }
+
+  React.useEffect(() => {
+    getEvent(params.eid)
+  }, [event])
+
   return (
     <React.Fragment>
       <CssBaseline />
@@ -19,7 +74,7 @@ export default function EventInfo() {
             style={{ height: "66vh", width: "200vh" }}
           ></img>
           <p>
-            <h2>Registration Count:25</h2>
+            <h2>Registration Count:{event?.bookedUsers?.length}</h2>
           </p>
         </Box>
       </Container>
@@ -27,7 +82,7 @@ export default function EventInfo() {
       <div className="grid">
         <Container maxWidth="sm">
           <Table sx={{ bgcolor: "#fff0f0  ", height: "70vh", width: "70vh" }}>
-            <InteractiveList></InteractiveList>
+            <InteractiveList event={event}></InteractiveList>
           </Table>
         </Container>
 
@@ -35,8 +90,17 @@ export default function EventInfo() {
           <Box sx={{ bgcolor: "#fff0f0  ", height: "70vh", width: "70vh" }}>
             <center>
               <h1>Registration</h1>
+              <h4> 
+                Rs.
+                {
+                  event?.eventPrice
+                }
+              </h4>
               <center>
-                <NavLink to="/registration">Register to This Event</NavLink>
+                {/* <NavLink to={`/payment/${event._id}`}>Register to This Event</NavLink> */}
+                <button className="border-2 border-black rounded-xl p-2" onClick = {handleRegister}>
+                  Register To event
+                </button>
               </center>
             </center>
           </Box>

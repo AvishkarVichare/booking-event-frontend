@@ -5,7 +5,7 @@ import ListItem from "@mui/material/ListItem";
 import Grid from "@mui/material/Grid";
 import { ListItemText } from "@mui/material";
 
-export default function InteractiveList() {
+export default function InteractiveList({event}) {
   return (
     <Box sx={{ flexGrow: 1, maxWidth: 752 }}>
       <center>
@@ -16,19 +16,19 @@ export default function InteractiveList() {
         <Grid item xs={12} md={6}>
           <List>
             <ListItem>
-              <ListItemText>Event Name:</ListItemText>
+              <ListItemText>Event Name: {event?.eventName}</ListItemText>
             </ListItem>
             <ListItem>
-              <ListItemText>Event Description:</ListItemText>
+              <ListItemText>Event Description: {event?.eventDescription}</ListItemText>
             </ListItem>
             <ListItem>
-              <ListItemText>Event Venue:</ListItemText>
+              <ListItemText>Event Venue: {event?.eventVenue}</ListItemText>
             </ListItem>
             <ListItem>
-              <ListItemText>Event Date:</ListItemText>
+              <ListItemText>Event Date: {new Date(event?.eventDate).toDateString()}</ListItemText>
             </ListItem>
             <ListItem>
-              <ListItemText>Event Time:</ListItemText>
+              <ListItemText>Event Time: {event?.eventTime}</ListItemText>
             </ListItem>
           </List>
         </Grid>

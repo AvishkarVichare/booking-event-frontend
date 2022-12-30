@@ -21,20 +21,20 @@ const columns = [
     field: "eventName",
     headerName: "Event name",
     width: 150,
-    editable: true,
+    // editable: true,
   },
   {
     field: "date",
     headerName: "Event Date",
     width: 150,
-    editable: true,
+    // editable: true,
   },
   {
     field: "time",
     headerName: "Event Time",
     type: "number",
     width: 110,
-    editable: true,
+    // editable: true,
   },
 ];
 
@@ -43,12 +43,20 @@ const rows = [];
 export const StudProfile = () => {
 
   const [user, setUser] = React.useState(null);
+  const [bookedEvents, setBookedEvents] = React.useState(null);
 
   React.useEffect(() => {
     axios.get("/u/getUser", { headers: { "token": localStorage.getItem("token") } }).then((res) => {
       setUser(res.data.user);
-      console.log(res.data.user)
+      // console.log(res.data.user)
     });
+
+
+    axios.get("/event/getBookedEvents", { headers: { "token": localStorage.getItem("token") } }).then((res) => {
+      setBookedEvents(res.data.events);
+      console.log(res.data.events)
+    });
+
   }, []);
 
 
@@ -88,7 +96,7 @@ export const StudProfile = () => {
                               <ListItemText>Student Name: {user?.name}</ListItemText>
                             </ListItem>
                             <ListItem>
-                              <ListItemText>Student ID: {user?._id}</ListItemText>
+                              <ListItemText>Student ID: {user?.studenid}</ListItemText>
                             </ListItem>
                             <ListItem>
                               <ListItemText>Student Email: {user?.email}</ListItemText>

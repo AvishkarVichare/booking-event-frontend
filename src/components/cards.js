@@ -29,7 +29,7 @@ function EventCard() {
           </b>
         </h2>
       </center>
-      <div className="grid">{events.map(e=>{
+      <div className="grid">{events.slice(0,6)?.map(e=>{
         return(
         <IndivisualCard event = {e} />
         )

@@ -25,18 +25,27 @@ function AdminHome() {
   },[])
 
   const columns = [
+    // {
+    //   key:uuidv4(),
+    //   field: "_id",
+    //   headerName: "Event ID",
+    //   width: 200,
+    // },
+    // {
+    //   key:uuidv4(),
+    //   field: "image",
+    //   headerName: "Event Avatar",
+    //   width: 200,
+    //   editable: true,
+
+    // },
+    
     {
       key:uuidv4(),
-      field: "_id",
-      headerName: "Event ID",
+      field: "eventName",
+      headerName: "Event Name",
       width: 200,
-    },
-    {
-      key:uuidv4(),
-      field: "photoURL",
-      headerName: "Event Avatar",
-      width: 200,
-      editable: true,
+      // editable: true,
 
     },
     {
@@ -44,15 +53,7 @@ function AdminHome() {
       field: "eventVenue",
       headerName: "Event Venue",
       width: 200,
-      editable: true,
-
-    },
-    {
-      key:uuidv4(),
-      field: "eventName",
-      headerName: "Event Name",
-      width: 200,
-      editable: true,
+      // editable: true,
 
     },
     {
@@ -82,7 +83,7 @@ function AdminHome() {
       headerName: "No of registers",
       type: "number",
       width: 220,
-      editable: true,
+      // editable: true,
       renderCell: ({ value }) => value.length,
       key: uuidv4(),
 

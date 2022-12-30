@@ -4,18 +4,22 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useContext, useState } from 'react';
 import EventContext from '../context/event/EventContext';
+import { useNavigate } from 'react-router-dom';
 
 function AddEvent() {
 
     const eventcontext = useContext(EventContext);
     const {createEvent} = eventcontext;
 
-    const [event, setEvent] = useState({eventName:"", eventHost:"", eventBranch:"", eventDate:"", eventTime:"", eventVenue:"", eventType:""})
+    const [event, setEvent] = useState({eventName:"", eventHost:"",eventDescription:"", eventBranch:"", eventDate:"", eventTime:"", eventVenue:"", eventType:""})
     const [image, setImage] = useState(null)
+
+    const navigate = useNavigate()
 
     const handleAdd = (e)=>{
         e.preventDefault()
         createEvent({...event, image:image})
+        navigate('/home')
     }
 
     const handleImage = (e)=>{
@@ -25,6 +29,7 @@ function AddEvent() {
 
     const handleOnChange = (e)=>{
         setEvent({...event, [e.target.name]: e.target.value})
+        console.log(event)
        
     }
 
@@ -43,12 +48,20 @@ function AddEvent() {
                             <Form.Control onChange = {handleOnChange}  type="text" placeholder="Event Host" name="eventHost"/>
                         </Form.Group>
                         <Form.Group className="mb-3">
+                            <Form.Label>Event Description</Form.Label>
+                            <Form.Control onChange = {handleOnChange}  type="text" placeholder="Event Description" name="eventDescription"/>
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Price</Form.Label>
+                            <Form.Control onChange = {handleOnChange}  type="number" placeholder="Event Price" name="eventPrice"/>
+                        </Form.Group>
+                        <Form.Group className="mb-3">
                             <Form.Label>Event Branch</Form.Label>
                             <Form.Control onChange = {handleOnChange}  type="text" placeholder="Event Branch" name="eventBranch"/>
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>Event Date</Form.Label>
-                            <Form.Control onChange = {handleOnChange}  type="text" placeholder="Event Date" name="eventDate"/>
+                            <Form.Control onChange = {handleOnChange}  type="date" placeholder="Event Date" name="eventDate"/>
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>Event Time</Form.Label>
@@ -67,7 +80,7 @@ function AddEvent() {
                             <Form.Control onChange = {handleImage}  type="file" name="image"/>
                         </Form.Group>
 
-                        <button onClick={handleAdd} type='submit'>Add</button>
+                        <button className='border-2 border-black p-2 rounded-xl bg-green-500 text-white' onClick={handleAdd} type='submit'>Add</button>
 
                     </Form>
                 </Col>

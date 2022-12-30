@@ -4,12 +4,13 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import banner1 from "../images/banner1.jpg";
 import Button from "@mui/material/Button";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Grid from "@mui/material/Grid";
 import EventContext from "../context/event/EventContext";
 import Modal from 'react-bootstrap/Modal';
+import axios from "axios";
 
 function AdminEventInfo() {
 
@@ -21,25 +22,46 @@ function AdminEventInfo() {
   const { getEvent, event, setEvent } = eventContext;
   const params = useParams()
 
+  const [bookedUsers, setBookeUsers] = useState([]);
+
+  const navigate = useNavigate();
+
   useEffect(() => {
-    getEvent(params.eid)
+    getEvent(params.eid);
+
+    axios.get(`/u/getUsersWhoBookedEvent/${params.eid}`, {
+      headers: {
+        'token': localStorage.getItem('token')
+      }
+    }).then((res) => {
+      setBookeUsers(res.data.users);
+      console.log(bookedUsers)
+    });
   }, [])
 
 
+  const handleDelete = async()=>{
+   const res  =  await axios.delete(`/event/delete/${params.eid}`, {
+        headers: {
+          'token': localStorage.getItem('token')
+        }
+      })
 
+      // console.log(res)
+      if(res.data.success){
+        navigate('/admin')
+      }
+      
+  }
 
-  const EventInfo = {
-    Event_ID: "1234",
-    Event_Name: "Techgyanathon",
-    Event_Venue: "VPPCOE",
-    Event_DateTime: "12/12/22 @ 12:00",
-    Event_Desc: "This is a good event and is very enjoyable",
-  };
   return (
     <>
       <React.Fragment>
         <CssBaseline />
-        <Container maxWidth="s">
+        <Container className="relative" maxWidth="s">
+          <button onClick={handleDelete} className="absolute right-12 top-6 bg-red-600 text-white p-2 rounded-2xl font-bold">
+            Delete Event
+          </button>
           <Box sx={{ bgcolor: "#cfe8fc", height: "165vh" }}>
             <br />
             <center>
@@ -52,7 +74,7 @@ function AdminEventInfo() {
               </Box>
             </center>
             <center>
-              
+
             </center>
             <br />
             <center>
@@ -167,10 +189,10 @@ function AdminEventInfo() {
               {/* <Button variant="contained" color="success">
               </Button> */}
               <Button variant="primary" onClick={handleShow}>
-              edit
+                edit
 
-      </Button>
-            
+              </Button>
+
             </center>
           </Box>
         </Container>
@@ -182,7 +204,7 @@ function AdminEventInfo() {
         </Modal.Header>
         <Modal.Body>
 
-              
+
 
         </Modal.Body>
         <Modal.Footer>
@@ -194,7 +216,7 @@ function AdminEventInfo() {
           </Button>
         </Modal.Footer>
       </Modal>
-  
+
     </>
   );
 }
