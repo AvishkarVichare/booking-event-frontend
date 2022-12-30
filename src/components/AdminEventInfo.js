@@ -10,6 +10,7 @@ import ListItem from "@mui/material/ListItem";
 import Grid from "@mui/material/Grid";
 import EventContext from "../context/event/EventContext";
 import Modal from 'react-bootstrap/Modal';
+import Table from 'react-bootstrap/Table';
 import axios from "axios";
 
 function AdminEventInfo() {
@@ -23,7 +24,7 @@ function AdminEventInfo() {
   const params = useParams()
 
   const [bookedUsers, setBookeUsers] = useState([]);
-  
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,31 +32,31 @@ function AdminEventInfo() {
   }, [])
 
 
-  useEffect(()=>{
+  useEffect(() => {
     axios.get(`/u/getUsersWhoBookedEvent/${params.eid}`, {
       headers: {
         'token': localStorage.getItem('token')
       }
     }).then((res) => {
       setBookeUsers(res.data.users);
-      console.log("booked",bookedUsers)
+      console.log("booked", bookedUsers)
     });
-  },[event])
+  }, [event])
 
-  const handleDelete = async()=>{
-   const res  =  await axios.delete(`/event/delete/${params.eid}`, {
-        headers: {
-          'token': localStorage.getItem('token')
-        }
-      })
-
-      // console.log(res)
-      if(res.data.success){
-        navigate('/admin')
+  const handleDelete = async () => {
+    const res = await axios.delete(`/event/delete/${params.eid}`, {
+      headers: {
+        'token': localStorage.getItem('token')
       }
-      
+    })
+
+    // console.log(res)
+    if (res.data.success) {
+      navigate('/admin')
+    }
+
   }
-console.log(event)
+  console.log(event)
   return (
     <>
       <React.Fragment>
@@ -180,6 +181,35 @@ console.log(event)
                     </Grid>
                   </Grid>
                 </center>
+
+                <br /><br />
+                <h2>Registered Students</h2>
+                <Table striped bordered hover>
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Student Name</th>
+                      <th>Phone No</th>
+                      <th>Email</th>
+                      <th>Branch</th>
+                      <th>Division</th>
+                      <th>Student ID</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {bookedUsers?.map((value, index) => {
+                      return <tr>
+                        <td>{index + 1}</td>
+                        <td>{value.name}</td>
+                        <td>{value.phone}</td>
+                        <td>{value.email}</td>
+                        <td>{value.branch}</td>
+                        <td>{value.div}</td>
+                        <td>{value._id}</td>
+                      </tr>
+                    })}
+                  </tbody>
+                </Table>
               </Box>
             </center>
             <br />
