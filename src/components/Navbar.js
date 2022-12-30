@@ -18,6 +18,11 @@ function NavScrollExample() {
 
   const navigate = useNavigate();
 
+  const handleSearchEvent = (e)=>{
+    e.preventDefault();
+    navigate(`/search/${search}`)
+  }
+
   return (
     <Navbar bg="blue" expand="lg">
       <Container fluid>
@@ -70,8 +75,8 @@ function NavScrollExample() {
               className="me-2"
               aria-label="Search"
             />
-            <Button variant="outline-success">
-              <NavLink to={`/search/${search}`}>Search</NavLink>
+            <Button type="submit" onClick={handleSearchEvent} variant="outline-success">
+             Search
             </Button>
           </Form>
 
