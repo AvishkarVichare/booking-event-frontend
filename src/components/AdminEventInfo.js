@@ -23,22 +23,24 @@ function AdminEventInfo() {
   const params = useParams()
 
   const [bookedUsers, setBookeUsers] = useState([]);
-
+  
   const navigate = useNavigate();
 
   useEffect(() => {
     getEvent(params.eid);
+  }, [])
 
+
+  useEffect(()=>{
     axios.get(`/u/getUsersWhoBookedEvent/${params.eid}`, {
       headers: {
         'token': localStorage.getItem('token')
       }
     }).then((res) => {
       setBookeUsers(res.data.users);
-      console.log(bookedUsers)
+      console.log("booked",bookedUsers)
     });
-  }, [])
-
+  },[event])
 
   const handleDelete = async()=>{
    const res  =  await axios.delete(`/event/delete/${params.eid}`, {
@@ -53,7 +55,7 @@ function AdminEventInfo() {
       }
       
   }
-
+console.log(event)
   return (
     <>
       <React.Fragment>
