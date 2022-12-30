@@ -9,7 +9,7 @@ function IndivisualCard ({event}){
 // const src = `data:${event.image.type};base64,${base64}`;
 
     return (
-      <Card style={{ width: "18rem" }} className="box">
+      <Card style={{ width: "18rem" , height:"400px"}} className="box">
         <img src={`http://localhost:5000/images/${event.image.filename}`} alt="My Image" />
         <h4>
           {

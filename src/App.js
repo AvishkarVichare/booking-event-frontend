@@ -11,11 +11,13 @@ import Registration from "./components/registration";
 import AdminHome from "./components/AdminHome";
 import { StudProfile } from "./components/studentprofile";
 import AdminEventInfo from "./components/AdminEventInfo";
-import Search from "./components/search";
+import Deparment from "./components/Deparment";
 import UserState from "./context/user/UserState";
 import EventState from "./context/event/EventState";
 import AddEvent from "./components/AddEvent";
 import RazorpayPayment from "./components/RazorpayPayment";
+import EventType from "./components/EventType";
+import Search from "./components/Search";
 
 function ColorSchemesExample() {
   return (
@@ -47,9 +49,11 @@ function ColorSchemesExample() {
 
         <Route path="/profile" element={<StudProfile />} />
 
-        <Route path="/search" element={<Search />} />
+        <Route path="/department/:filter" element={<Deparment />} />
+        <Route path="/type/:filter" element={<EventType />} />
 
         <Route path="/addevent" element={<AddEvent />}></Route>
+        <Route path="/search/:search" element={<Search />}></Route>
 
         {/* <Route path="/payment/:eid" element={<RazorpayPayment />}></Route> */}
 

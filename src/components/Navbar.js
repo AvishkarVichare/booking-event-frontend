@@ -4,11 +4,20 @@ import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Dropdown from "react-bootstrap/Dropdown";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
 import Button2 from "@mui/material/Button";
+import { useState } from "react";
 
 function NavScrollExample() {
+
+  const [search, setSearch] = useState("");
+  const handleOnChange = (e)=>{
+    setSearch(e.target.value);
+  }
+
+  const navigate = useNavigate();
+
   return (
     <Navbar bg="blue" expand="lg">
       <Container fluid>
@@ -31,11 +40,11 @@ function NavScrollExample() {
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
-                <Dropdown.Item>Information Technology</Dropdown.Item>
-                <Dropdown.Item>Computer Science</Dropdown.Item>
-                <Dropdown.Item>Electronics & Telecommunication</Dropdown.Item>
-                <Dropdown.Item>Automobile</Dropdown.Item>
-                <Dropdown.Item>Civil</Dropdown.Item>
+                <Dropdown.Item onClick={()=>navigate('/department/IT')}>Information Technology</Dropdown.Item>
+                <Dropdown.Item onClick={()=>navigate('/department/CS')}>Computer Science</Dropdown.Item>
+                <Dropdown.Item onClick={()=>navigate('/department/EXTC')}>Electronics & Telecommunication</Dropdown.Item>
+                <Dropdown.Item onClick={()=>navigate('/department/AUTO')}>Automobile</Dropdown.Item>
+                <Dropdown.Item onClick={()=>navigate('/department/CIVIL')}>Civil</Dropdown.Item>
 
               </Dropdown.Menu>
             </Dropdown>
@@ -46,21 +55,23 @@ function NavScrollExample() {
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
-                <Dropdown.Item>Technical</Dropdown.Item>
-                <Dropdown.Item>Non Technical</Dropdown.Item>
+                <Dropdown.Item onClick={()=>navigate('/type/technical')}>Technical</Dropdown.Item>
+                <Dropdown.Item onClick={()=>navigate('/type/non-technical')}>Non Technical</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           </Nav>
 
           <Form className="d-flex">
             <Form.Control
+            onChange={handleOnChange}
+            name = "search"
               type="search"
               placeholder="Search"
               className="me-2"
               aria-label="Search"
             />
             <Button variant="outline-success">
-              <NavLink to="/search">Search</NavLink>
+              <NavLink to={`/search/${search}`}>Search</NavLink>
             </Button>
           </Form>
 

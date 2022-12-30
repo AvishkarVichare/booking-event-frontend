@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
+import Form from 'react-bootstrap/Form';
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import banner1 from "../images/banner1.jpg";
@@ -19,11 +20,13 @@ function AdminEventInfo() {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [showImgInput, setShowImgInput] = useState(false);
   const eventContext = useContext(EventContext)
-  const { getEvent, event, setEvent } = eventContext;
+  const { getEvent, event, setEvent, editEvent ,editEventImg} = eventContext;
   const params = useParams()
 
   const [bookedUsers, setBookeUsers] = useState([]);
+  const [image, setImage] = useState(null);
 
   const navigate = useNavigate();
 
@@ -39,7 +42,7 @@ function AdminEventInfo() {
       }
     }).then((res) => {
       setBookeUsers(res.data.users);
-      console.log("booked", bookedUsers)
+      // console.log("booked", bookedUsers)
     });
   }, [event])
 
@@ -56,7 +59,39 @@ function AdminEventInfo() {
     }
 
   }
-  console.log(event)
+
+
+  const handleOnChange = (e) => {
+    setEvent({ ...event, [e.target.name]: e.target.value })
+
+  }
+
+  const handleImage = (e) => {
+    setImage(e.target.files[0]);
+
+    // console.log(event)
+    // console.log("new evetn",newEvent);
+    // console.log("This is", event)
+
+  }
+
+  const handleDoneEdit = (e) => {
+    // console.log("this is image", image)
+    editEvent(params.eid, event);
+    // setImage(null)
+    e.preventDefault();
+    handleClose();
+  }
+  const handleDoneEditImg = (e) => {
+    // console.log("this is image", image)
+    editEventImg(params.eid, {...event, image});
+    // setImage(null)
+    e.preventDefault();
+    getEvent(params.eid);
+    setShowImgInput(false);
+  }
+
+  // console.log(event) 
   return (
     <>
       <React.Fragment>
@@ -67,14 +102,38 @@ function AdminEventInfo() {
           </button>
           <Box sx={{ bgcolor: "#cfe8fc", height: "165vh" }}>
             <br />
-            <center>
+            <center className="relative p-6">
               <Box sx={{ width: "100vh", height: "60vh" }}>
-                <img
-                  src={`http://localhost:5000/images/${event?.image?.filename}`}
-                  alt="banner1"
-                  style={{ height: "60vh", width: "100vh" }}
-                ></img>
+                {
+                  event?.image?.filename ? (
+                    <img
+                      src={`http://localhost:5000/images/${event?.image?.filename}`}
+                      alt="banner1"
+                      style={{ height: "60vh", width: "100vh" }}
+                    />
+                  ) : <></>
+                }
+
+                <button onClick={()=>setShowImgInput(true)} className="bg-green-400 text-white my-1 font-bold p-2 rounded-xl">Edit image</button>
               </Box>
+            {
+              showImgInput?(
+                <div className="border-2 border-black absolute z-100 bg-white w-fit right-[5%] left-[5%] mx-auto top-[15%] rounded-xl p-3">
+                 
+                <Form >
+                  <Form.Group controlId="formFile" className="mb-3">
+                    <Form.Label>Image Input</Form.Label>
+                    <Form.Control onChange={handleImage} type="file" name="image" />
+                  </Form.Group>
+                  <button onClick={()=>setShowImgInput(false)} className="bg-red-500 text-white mr-2 font-bold p-2 rounded-xl">
+                    close
+                  </button>
+                  <button onClick={handleDoneEditImg} className='border-2 border-black p-2 rounded-xl bg-green-500 text-white' type='submit'>Done</button>
+
+                </Form>
+              </div>
+              ):<></>
+            }
             </center>
             <center>
 
@@ -110,7 +169,7 @@ function AdminEventInfo() {
                             </span>
                             <span >
                               {
-                                event?.description
+                                event?.eventDescription
                               }
                             </span>
                           </div>
@@ -236,16 +295,57 @@ function AdminEventInfo() {
         </Modal.Header>
         <Modal.Body>
 
+          <Form >
+            <Form.Group className="mb-3">
+              <Form.Label>Event Name</Form.Label>
+              <Form.Control value={event?.eventName} onChange={handleOnChange} type="text" placeholder="Event Name" name="eventName" />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Event Host</Form.Label>
+              <Form.Control value={event?.eventHost} onChange={handleOnChange} type="text" placeholder="Event Host" name="eventHost" />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Event Description</Form.Label>
+              <Form.Control value={event?.eventDescription} onChange={handleOnChange} type="text" placeholder="Event Description" name="eventDescription" />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Price</Form.Label>
+              <Form.Control value={event?.eventPrice} onChange={handleOnChange} type="number" placeholder="Event Price" name="eventPrice" />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Event Branch</Form.Label>
+              <Form.Control value={event?.eventBranch} onChange={handleOnChange} type="text" placeholder="Event Branch" name="eventBranch" />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Event Date</Form.Label>
+              <Form.Control value={event?.eventDate} onChange={handleOnChange} type="text" placeholder="Event Date" name="eventDate" />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Event Time</Form.Label>
+              <Form.Control value={event?.eventTime} onChange={handleOnChange} type="text" placeholder="Event Time" name="eventTime" />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Event Venue</Form.Label>
+              <Form.Control value={event?.eventVenue} onChange={handleOnChange} type="text" placeholder="Event Venue" name="eventVenue" />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Event Type</Form.Label>
+              <Form.Control value={event?.eventType} onChange={handleOnChange} type="text" placeholder="Event Type" name="eventType" />
+            </Form.Group>
 
+
+            <button onClick={handleDoneEdit} className='border-2 border-black p-2 rounded-xl bg-green-500 text-white' type='submit'>Done</button>
+
+          </Form>
 
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          {/* <Button   variant="primary" onClick={handleDoneEdit}>
             Save Changes
-          </Button>
+          </Button> */}
         </Modal.Footer>
       </Modal>
 

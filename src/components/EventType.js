@@ -7,26 +7,24 @@ import Card from "react-bootstrap/Card";
 import "../App.css";
 import EventContext from "../context/event/EventContext";
 import IndivisualCard from "./IndivisualCard";
-import axios from "axios";
 
 
-function Search() {
+function EventType() {
   const params = useParams();
+  const eventContext = useContext(EventContext);
+  const { getEvents, events } = eventContext;
   const [filteredEvents, setFilteredEvents] = useState([]);
+  // console.log(filter)
 
-    const getSearchedEvents = async()=>{
-        const res = await axios.get(`/event/searchEvents?search=${params.search}`,{
-            headers:{
-                'token':localStorage.getItem('token'),
-            }
-        })
-        setFilteredEvents(res.data.events);
-        // console.log(res.data.events)
-    }
+
 
   useEffect(() => {
-        getSearchedEvents()
-  }, [params.search])
+    getEvents()
+    setFilteredEvents(events?.filter(e => {
+      return e.eventType.toLowerCase() == params.filter.toLowerCase();
+    }))
+    console.log(filteredEvents)
+  }, [params.filter])
 
 
 
@@ -37,13 +35,12 @@ function Search() {
         <Container maxWidth="s">
           <Box sx={{ bgcolor: "pink", height: "100vh" }}>
             <center>
-              <h1>
-                {
-                  params.filter
-                }
-                <span className="ml-3">
-                Deparment
-                </span>
+              <h1>{
+              params.filter
+              }
+              <span className="ml-3">
+                Events
+              </span>
               </h1>
             </center>
             <div className="grid">
@@ -60,4 +57,4 @@ function Search() {
   );
 }
 
-export default Search;
+export default EventType;

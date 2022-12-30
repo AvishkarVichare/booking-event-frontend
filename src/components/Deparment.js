@@ -7,26 +7,24 @@ import Card from "react-bootstrap/Card";
 import "../App.css";
 import EventContext from "../context/event/EventContext";
 import IndivisualCard from "./IndivisualCard";
-import axios from "axios";
 
 
-function Search() {
+function Department() {
   const params = useParams();
+  const eventContext = useContext(EventContext);
+  const { getEvents, events } = eventContext;
   const [filteredEvents, setFilteredEvents] = useState([]);
+  // console.log(filter)
 
-    const getSearchedEvents = async()=>{
-        const res = await axios.get(`/event/searchEvents?search=${params.search}`,{
-            headers:{
-                'token':localStorage.getItem('token'),
-            }
-        })
-        setFilteredEvents(res.data.events);
-        // console.log(res.data.events)
-    }
+
 
   useEffect(() => {
-        getSearchedEvents()
-  }, [params.search])
+    getEvents()
+    setFilteredEvents(events?.filter(e => {
+      return e.eventBranch.toLowerCase() == params.filter.toLowerCase();
+    }))
+    console.log(filteredEvents)
+  }, [params.filter])
 
 
 
@@ -60,4 +58,4 @@ function Search() {
   );
 }
 
-export default Search;
+export default Department;
