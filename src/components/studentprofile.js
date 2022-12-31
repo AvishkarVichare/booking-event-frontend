@@ -58,7 +58,7 @@ export const StudProfile = () => {
 
     axios.get("/event/getBookedEvents", { headers: { "token": localStorage.getItem("token") } }).then((res) => {
       setBookedEvents(res.data.events);
-      console.log(res.data.events)
+      // console.log(res.data.events)
     });
 
   }, []);
@@ -66,7 +66,7 @@ export const StudProfile = () => {
 
   const handleOnChange = (e)=>{
     setUser({...user, [e.target.name]:e.target.value});
-    console.log(user)
+    // console.log(user)
   }
 
   const handleEditDone = async(e)=>{
