@@ -67,7 +67,7 @@ export const StudProfile = () => {
           <Box sx={{ bgcolor: "#fffff0", width: "100vh" }}>
             <br />
             <Container maxWidth="s">
-              <Box sx={{ bgcolor: "#ffffff", height: "30vh", width: "30vh" }}>
+              {/* <Box sx={{ bgcolor: "#ffffff", height: "30vh", width: "30vh" }}>
                 <img
                   src={profile}
                   alt="profile"
@@ -78,7 +78,7 @@ export const StudProfile = () => {
                   Upload
                   <input hidden accept="image/*" multiple type="file" />
                 </Button>
-              </Box>
+              </Box> */}
             </Container>
             <br />
             <Container maxWidth="s">
@@ -95,7 +95,7 @@ export const StudProfile = () => {
                             <ListItemText>Student Name: {user?.name}</ListItemText>
                           </ListItem>
                           <ListItem>
-                            <ListItemText>Student ID: {user?._id}</ListItemText>
+                            <ListItemText>Student ID: {user?.studentid}</ListItemText>
                           </ListItem>
                           <ListItem>
                             <ListItemText>Student Email: {user?.email}</ListItemText>

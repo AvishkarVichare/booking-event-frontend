@@ -7,7 +7,7 @@ function SignPage() {
   const userContext = useContext(UserContext);
   const {signUp} = userContext;
 
-  const [user, setUser] = useState({name:"", username:"", email:"", password:"", phone:0, div:"", branch:"", studentid:"", });
+  const [user, setUser] = useState({name:"", username:"", email:"", password:"", phone:0, div:"", branch:"", studentid:"", collegname:"" });
 
   const handlSignUp = (e)=>{
     e.preventDefault();
@@ -46,6 +46,14 @@ function SignPage() {
             <label>Username</label>
             <input onChange= {handleOnChange} 
             name="username"
+              type="text"
+              className="rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
+            ></input>
+          </div>
+          <div className="flex flex-col text-gray-400 py-2">
+            <label>College Name</label>
+            <input onChange= {handleOnChange} 
+            name="collegname"
               type="text"
               className="rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
             ></input>
