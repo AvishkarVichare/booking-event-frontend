@@ -42,9 +42,9 @@ export default function EventInfo() {
         // console.log("our res",res)
       },
       prefill: {
-          name: "Gaurav Kumar",
-          email: "gaurav.kumar@example.com",
-          contact: "9999999999"
+          name: user?.name,
+          email: user?.email,
+          contact: user?.phone
       },
       notes: {
           address: "Razorpay Corporate Office"
