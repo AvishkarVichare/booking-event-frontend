@@ -20,13 +20,21 @@ export default function AdminSignup() {
     const handleSignUp = (e) => {
         console.log(user)
         axios.post('/u/signUpAdmin', user)
-            .then(function (response) {
-                console.log(response);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-        navigate(`/admin-login`)
+             .then(function (response) {
+                 if(response?.data?.success){
+                     localStorage.setItem('token', response.data.token)
+                     navigate('/admin')
+                 }else{
+                     alert("cant sign up")
+                 }
+             })
+             .catch(function (error) {
+                 console.log(error);
+                 alert("can't signup")
+             });
+    
+
+       
 
     }
 
