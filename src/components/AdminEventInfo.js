@@ -253,6 +253,7 @@ function AdminEventInfo() {
                       <th>Branch</th>
                       <th>Division</th>
                       <th>Student ID</th>
+                      <th>College Name</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -264,7 +265,8 @@ function AdminEventInfo() {
                         <td>{value.email}</td>
                         <td>{value.branch}</td>
                         <td>{value.div}</td>
-                        <td>{value._id}</td>
+                        <td>{value.studentid}</td>
+                        <td>{value.collegname}</td>
                       </tr>
                     })}
                   </tbody>

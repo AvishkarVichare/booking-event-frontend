@@ -115,9 +115,9 @@ export const StudProfile = () => {
                   </Grid>
                 </p>
                 <center>
-                  <Button variant="contained" color="success">
+                  {/* <Button variant="contained" color="success">
                     Edit Info
-                  </Button>
+                  </Button> */}
                 </center>
               </Box>
             </Container>

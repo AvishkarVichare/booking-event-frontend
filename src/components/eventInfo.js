@@ -12,12 +12,13 @@ import Razorpay from 'react-razorpay'
 import { data } from "autoprefixer";
 
 export default function EventInfo() {
-
+  
   const eventContext = React.useContext(EventContext)
   const { getEvent, event, setEvent } = eventContext;
   const params = useParams()
-
-
+  const [booked, setBooked] = React.useState(null)
+  const [user, setUser] = React.useState(null);
+  
  
   const handleRegister = async()=>{
     const res = await axios.post('/orders',{
@@ -60,7 +61,22 @@ export default function EventInfo() {
   }
 
   React.useEffect(() => {
+    axios.get("/u/getUser", { headers: { "token": localStorage.getItem("token") } }).then((res) => {
+      setUser(res.data.user);
+      // console.log(res.data.user)
+    });
+  },[])
+    
+
+  React.useEffect(() => {
     getEvent(params.eid)
+    event?.bookedUsers?.forEach(e=>{
+      if(e==user?._id){
+        setBooked(true);
+      }else{
+        setBooked(false)
+      }
+    })
   }, [event])
 
   return (
@@ -98,9 +114,13 @@ export default function EventInfo() {
               </h4>
               <center>
                 {/* <NavLink to={`/payment/${event._id}`}>Register to This Event</NavLink> */}
-                <button className="border-2 border-black rounded-xl p-2" onClick = {handleRegister}>
+               {
+                booked?(<h4>Already Registered</h4>):(
+                  <button className="border-2 border-black rounded-xl p-2" onClick = {handleRegister}>
                   Register To event
                 </button>
+                )
+               }
               </center>
             </center>
           </Box>
