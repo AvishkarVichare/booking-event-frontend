@@ -1,6 +1,6 @@
 import { CssBaseline } from "@mui/material";
 import { Box, Container } from "@mui/system";
-import React from "react";
+import React, { useState } from "react";
 import profile from "../images/profile.png";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -44,6 +44,10 @@ const columns = [
 export const StudProfile = () => {
   const [user, setUser] = React.useState(null);
   const [bookedEvents, setBookedEvents] = React.useState(null);
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   React.useEffect(() => {
     axios.get("/u/getUser", { headers: { "token": localStorage.getItem("token") } }).then((res) => {
@@ -59,6 +63,21 @@ export const StudProfile = () => {
 
   }, []);
 
+
+  const handleOnChange = (e)=>{
+    setUser({...user, [e.target.name]:e.target.value});
+    console.log(user)
+  }
+
+  const handleEditDone = async(e)=>{
+    e.preventDefault();
+    const res = await axios.put('/u/edit',user,{
+      headers:{
+        'token': localStorage.getItem('token')
+      }
+    })
+    // console.log(res)
+  }
 
   return (
     <center>
@@ -115,9 +134,9 @@ export const StudProfile = () => {
                   </Grid>
                 </p>
                 <center>
-                  {/* <Button variant="contained" color="success">
+                  <Button onClick={handleShow} variant="contained" color="success">
                     Edit Info
-                  </Button> */}
+                  </Button>
                 </center>
               </Box>
             </Container>
@@ -157,6 +176,101 @@ export const StudProfile = () => {
           </Container>
         </CssBaseline>
       </React.Fragment>
+
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>
+          edit Info
+            
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+
+        <div className="bg-neon-800 flex flex-col justify-center">
+        <form className="max-w-[500px] w-full mx-auto bg-gray-900 p-8 px-8 rounded-lg">
+          <h2 className="text-4xl dark:text-white font-bold text-center">
+          </h2>
+          <div className="flex flex-col text-gray-400 py-2">
+            <label>Name</label>
+            <input value={user?.name} onChange= {handleOnChange} 
+            name="name"
+              type="text"
+              className="rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
+            ></input>
+          </div>
+          <div className="flex flex-col text-gray-400 py-2">
+            <label>Email</label>
+            <input value={user?.email} onChange= {handleOnChange} 
+            name="email"
+              type="text"
+              className="rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
+            ></input>
+          </div>
+          <div className="flex flex-col text-gray-400 py-2">
+            <label>Username</label>
+            <input value={user?.username} onChange= {handleOnChange} 
+            name="username"
+              type="text"
+              className="rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
+            ></input>
+          </div>
+          <div className="flex flex-col text-gray-400 py-2">
+            <label>College Name</label>
+            <input value={user?.collegname} onChange= {handleOnChange} 
+            name="collegname"
+              type="text"
+              className="rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
+            ></input>
+          </div>
+          <div className="flex flex-col text-gray-400 py-2">
+            <label>Student Id</label>
+            <input value={user?.studentid} onChange= {handleOnChange} 
+            name="studentid"
+              type="text"
+              className="rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
+            ></input>
+          </div>
+          <div className="flex flex-col text-gray-400 py-2">
+            <label>Branch</label>
+            <input value={user?.branch} onChange= {handleOnChange} 
+            name="branch"
+              type="text"
+              className="rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
+            ></input>
+          </div>
+          <div className="flex flex-col text-gray-400 py-2">
+            <label>phone no</label>
+            <input value={user?.phone} onChange= {handleOnChange} 
+            name="phone"
+              type="number"
+              className="rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
+            ></input>
+          </div>
+          <div className="flex flex-col text-gray-400 py-2">
+            <label>div</label>
+            <input value={user?.div} onChange= {handleOnChange} 
+            name="div"
+              type="text"
+              className="rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
+            ></input>
+          </div>
+          <button className="text-white bg-green-500 p-2 rounded-xl" onClick={handleEditDone}>
+            Done
+          </button>
+        </form>
+      </div>
+
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          {/* <Button   variant="primary" onClick={handleDoneEdit}>
+            Save Changes
+          </Button> */}
+        </Modal.Footer>
+      </Modal>
     </center>
   );
 };

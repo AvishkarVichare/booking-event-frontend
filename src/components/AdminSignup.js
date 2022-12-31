@@ -5,7 +5,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import axios from "axios"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 
 export default function AdminSignup() {
@@ -66,7 +66,7 @@ export default function AdminSignup() {
                                 SignUp
                             </Button>
                             <br /><br />
-                            <a href="/admin-login" className="text-danger">Already! Faculty, Login Instead</a>
+                            <Link to="/admin-login" className="text-danger">Already! Faculty, Login Instead</Link>
                         </Form>
                     </Col>
                 </Row>

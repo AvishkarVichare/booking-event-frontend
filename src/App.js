@@ -15,7 +15,6 @@ import Deparment from "./components/Deparment";
 import UserState from "./context/user/UserState";
 import EventState from "./context/event/EventState";
 import AddEvent from "./components/AddEvent";
-import RazorpayPayment from "./components/RazorpayPayment";
 import EventType from "./components/EventType";
 import Search from "./components/Search";
 import AdminSignup from "./components/AdminSignup";
@@ -59,7 +58,7 @@ function ColorSchemesExample() {
         <Route path="/search/:search" element={<Search />}></Route>
 
         <Route path="/admin-signup" element={<AdminSignup />}></Route>
-        {/* <Route path="/admin-login" element={<AdminLogin />}></Route> */}
+        <Route path="/admin-login" element={<AdminLogin />}></Route>
 
 
         {/* <Route path="/payment/:eid" element={<RazorpayPayment />}></Route> */}
