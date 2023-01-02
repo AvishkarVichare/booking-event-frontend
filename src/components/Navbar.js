@@ -50,6 +50,7 @@ function NavScrollExample() {
                 <Dropdown.Item onClick={()=>navigate('/department/EXTC')}>Electronics & Telecommunication</Dropdown.Item>
                 <Dropdown.Item onClick={()=>navigate('/department/AUTO')}>Automobile</Dropdown.Item>
                 <Dropdown.Item onClick={()=>navigate('/department/CIVIL')}>Civil</Dropdown.Item>
+                <Dropdown.Item onClick={()=>navigate('/department/AIDS')}>AIDS</Dropdown.Item>
 
               </Dropdown.Menu>
             </Dropdown>

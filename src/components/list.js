@@ -30,6 +30,9 @@ export default function InteractiveList({event}) {
             <ListItem>
               <ListItemText>Event Time: {event?.eventTime}</ListItemText>
             </ListItem>
+            <ListItem>
+              <ListItemText>Event Mode: {event?.eventMode}</ListItemText>
+            </ListItem>
           </List>
         </Grid>
       </Grid>

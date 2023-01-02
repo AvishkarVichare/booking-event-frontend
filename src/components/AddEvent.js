@@ -11,7 +11,7 @@ function AddEvent() {
     const eventcontext = useContext(EventContext);
     const {createEvent} = eventcontext;
 
-    const [event, setEvent] = useState({eventName:"", eventHost:"",eventDescription:"", eventBranch:"", eventDate:"", eventTime:"", eventVenue:"", eventType:""})
+    const [event, setEvent] = useState({eventName:"", eventHost:"",eventDescription:"", eventBranch:"", eventDate:"", eventTime:"", eventVenue:"", eventType:"", eventMode:""})
     const [image, setImage] = useState(null)
 
     const navigate = useNavigate()
@@ -74,6 +74,10 @@ function AddEvent() {
                         <Form.Group className="mb-3">
                             <Form.Label>Event Type</Form.Label>
                             <Form.Control onChange = {handleOnChange}  type="text" placeholder="Event Type" name="eventType"/>
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Event mode</Form.Label>
+                            <Form.Control onChange = {handleOnChange}  type="text" placeholder="Event Mode" name="eventMode"/>
                         </Form.Group>
                         <Form.Group controlId="formFile" className="mb-3">
                             <Form.Label>Image Input</Form.Label>

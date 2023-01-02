@@ -14,7 +14,7 @@ function Department() {
   const eventContext = useContext(EventContext);
   const { getEvents, events } = eventContext;
   const [filteredEvents, setFilteredEvents] = useState([]);
-  // console.log(filter)
+  console.log(params.filter)
 
 
 

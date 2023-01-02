@@ -22,7 +22,7 @@ function AdminEventInfo() {
   const handleShow = () => setShow(true);
   const [showImgInput, setShowImgInput] = useState(false);
   const eventContext = useContext(EventContext)
-  const { getEvent, event, setEvent, editEvent ,editEventImg} = eventContext;
+  const { getEvent, event, setEvent, editEvent, editEventImg } = eventContext;
   const params = useParams()
 
   const [bookedUsers, setBookeUsers] = useState([]);
@@ -84,7 +84,7 @@ function AdminEventInfo() {
   }
   const handleDoneEditImg = (e) => {
     // console.log("this is image", image)
-    editEventImg(params.eid, {...event, image});
+    editEventImg(params.eid, { ...event, image });
     // setImage(null)
     e.preventDefault();
     getEvent(params.eid);
@@ -97,7 +97,7 @@ function AdminEventInfo() {
       <React.Fragment>
         <CssBaseline />
         <Container className="relative" maxWidth="s">
-          <button onClick={handleDelete} className="absolute right-12 top-6 bg-red-600 text-white p-2 rounded-2xl font-bold">
+          <button onClick={handleDelete} className="absolute right-12 z-[100] top-6 bg-red-600 text-white p-2 rounded-2xl font-bold">
             Delete Event
           </button>
           <Box sx={{ bgcolor: "#cfe8fc", height: "165vh" }}>
@@ -114,26 +114,26 @@ function AdminEventInfo() {
                   ) : <></>
                 }
 
-                <button onClick={()=>setShowImgInput(true)} className="bg-green-400 text-white my-1 font-bold p-2 rounded-xl">Edit image</button>
+                <button onClick={() => setShowImgInput(true)} className="bg-green-400 text-white my-1 font-bold p-2 rounded-xl">Edit image</button>
               </Box>
-            {
-              showImgInput?(
-                <div className="border-2 border-black absolute z-100 bg-white w-fit right-[5%] left-[5%] mx-auto top-[15%] rounded-xl p-3">
-                 
-                <Form >
-                  <Form.Group controlId="formFile" className="mb-3">
-                    <Form.Label>Image Input</Form.Label>
-                    <Form.Control onChange={handleImage} type="file" name="image" />
-                  </Form.Group>
-                  <button onClick={()=>setShowImgInput(false)} className="bg-red-500 text-white mr-2 font-bold p-2 rounded-xl">
-                    close
-                  </button>
-                  <button onClick={handleDoneEditImg} className='border-2 border-black p-2 rounded-xl bg-green-500 text-white' type='submit'>Done</button>
+              {
+                showImgInput ? (
+                  <div className="border-2 border-black absolute z-100 bg-white w-fit right-[5%] left-[5%] mx-auto top-[15%] rounded-xl p-3">
 
-                </Form>
-              </div>
-              ):<></>
-            }
+                    <Form >
+                      <Form.Group controlId="formFile" className="mb-3">
+                        <Form.Label>Image Input</Form.Label>
+                        <Form.Control onChange={handleImage} type="file" name="image" />
+                      </Form.Group>
+                      <button onClick={() => setShowImgInput(false)} className="bg-red-500 text-white mr-2 font-bold p-2 rounded-xl">
+                        close
+                      </button>
+                      <button onClick={handleDoneEditImg} className='border-2 border-black p-2 rounded-xl bg-green-500 text-white' type='submit'>Done</button>
+
+                    </Form>
+                  </div>
+                ) : <></>
+              }
             </center>
             <center>
 
@@ -220,6 +220,18 @@ function AdminEventInfo() {
                             <span >
                               {
                                 event.eventType
+                              }
+                            </span>
+                          </div>
+                        </ListItem>
+                        <ListItem>
+                          <div className="flex gap-3">
+                            <span>
+                              Event Mode:
+                            </span>
+                            <span >
+                              {
+                                event?.eventMode
                               }
                             </span>
                           </div>
@@ -333,6 +345,10 @@ function AdminEventInfo() {
             <Form.Group className="mb-3">
               <Form.Label>Event Type</Form.Label>
               <Form.Control value={event?.eventType} onChange={handleOnChange} type="text" placeholder="Event Type" name="eventType" />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Event mode</Form.Label>
+              <Form.Control onChange={handleOnChange} type="text" placeholder="Event Mode" name="eventMode" />
             </Form.Group>
 
 
