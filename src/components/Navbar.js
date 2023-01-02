@@ -63,6 +63,10 @@ function NavScrollExample() {
               <Dropdown.Menu>
                 <Dropdown.Item onClick={()=>navigate('/type/technical')}>Technical</Dropdown.Item>
                 <Dropdown.Item onClick={()=>navigate('/type/non-technical')}>Non Technical</Dropdown.Item>
+                <Dropdown.Item onClick={()=>navigate('/type/seasonal')}>Seasonal</Dropdown.Item>
+                <Dropdown.Item onClick={()=>navigate('/type/workshop')}>workshop</Dropdown.Item>
+                <Dropdown.Item onClick={()=>navigate('/type/cultural')}>cultural</Dropdown.Item>
+                <Dropdown.Item onClick={()=>navigate('/type/sports')}>sports</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           </Nav>
