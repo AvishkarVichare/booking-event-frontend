@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Form from 'react-bootstrap/Form';
 import Box from "@mui/material/Box";
@@ -13,9 +13,12 @@ import EventContext from "../context/event/EventContext";
 import Modal from 'react-bootstrap/Modal';
 import Table from 'react-bootstrap/Table';
 import axios from "axios";
+import { DownloadTableExcel } from 'react-export-table-to-excel';
 
 function AdminEventInfo() {
 
+
+  const tableRef = useRef(null);
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -255,7 +258,7 @@ function AdminEventInfo() {
 
                 <br /><br />
                 <h2>Registered Students</h2>
-                <Table striped bordered hover>
+                <Table striped bordered hover ref={tableRef}>
                   <thead>
                     <tr>
                       <th>#</th>
@@ -265,7 +268,6 @@ function AdminEventInfo() {
                       <th>Branch</th>
                       <th>Division</th>
                       <th>Student ID</th>
-                      <th>College Name</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -278,7 +280,6 @@ function AdminEventInfo() {
                         <td>{value.branch}</td>
                         <td>{value.div}</td>
                         <td>{value.studentid}</td>
-                        <td>{value.collegname}</td>
                       </tr>
                     })}
                   </tbody>
@@ -295,8 +296,19 @@ function AdminEventInfo() {
               </Button> */}
               <Button variant="primary" onClick={handleShow}>
                 edit
-
               </Button>
+              
+
+              <DownloadTableExcel
+                    filename="users table"
+                    sheet="users"
+                    currentTableRef={tableRef.current}
+                >
+
+                   <button> Export excel </button>
+
+                </DownloadTableExcel>
+              
 
             </center>
           </Box>
