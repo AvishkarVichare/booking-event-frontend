@@ -19,7 +19,7 @@ import EventType from "./components/EventType";
 import Search from "./components/Search";
 import AdminSignup from "./components/AdminSignup";
 import AdminLogin from "./components/AdminLogin";
-
+import Mode from './components/Mode'
 
 function ColorSchemesExample() {
   return (
@@ -53,6 +53,7 @@ function ColorSchemesExample() {
 
         <Route path="/department/:filter" element={<Deparment />} />
         <Route path="/type/:filter" element={<EventType />} />
+        <Route path="/mode/:filter" element={<Mode />} />
 
         <Route path="/addevent" element={<AddEvent />}></Route>
         <Route path="/search/:search" element={<Search />}></Route>

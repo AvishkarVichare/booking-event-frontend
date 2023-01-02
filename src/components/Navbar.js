@@ -69,6 +69,16 @@ function NavScrollExample() {
                 <Dropdown.Item onClick={()=>navigate('/type/sports')}>sports</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
+            <Dropdown>
+              <Dropdown.Toggle variant="success" id="dropdown-basic">
+                Mode
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                <Dropdown.Item onClick={()=>navigate('/mode/online')}>Online</Dropdown.Item>
+                <Dropdown.Item onClick={()=>navigate('/mode/offline')}>Offline</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
           </Nav>
 
           <Form className="d-flex">
