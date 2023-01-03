@@ -5,7 +5,7 @@ import "../App.css";
 
 export const Footer = () => {
   return (
-    <CDBFooter className="footer">
+    <CDBFooter className="footer  z-10">
       <CDBBox
         display="flex"
         color="#808080"
@@ -14,7 +14,7 @@ export const Footer = () => {
         className="mx-auto py-4 flex-wrap"
         style={{ width: "80%" }}
       >
-        <CDBBox display="flex" alignItems="center">
+        <CDBBox heig display="flex" alignItems="center">
           <a href="/" className="d-flex align-items-center p-0 text-dark">
             <img alt="logo" src={footer} width="30px" />
             <span className="ml-4 h5 mb-0 font-weight-bold">EventApp</span>
